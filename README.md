@@ -1,8 +1,9 @@
 # CSCI201
 Vending Machine
 
-##Mapping Interface
-###How to use:
+## Mapping Interface
+
+### How to use:
 
 Include this script in whatever page needs a map, along with these:
 <script async defer 
