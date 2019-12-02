@@ -19,9 +19,16 @@ html, body {
 	padding-bottom: 20px;
 }
 
+#logo{
+	position: absolute;
+	padding-top: 15px;
+	
+}
 #vendingLogo{
+	position: absolute;
 	padding-top: 10px;
-	margin-left: 630px;
+	margin-left: 590px;
+	
 	
 }
 #headSearch{

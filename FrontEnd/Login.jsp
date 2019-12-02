@@ -11,7 +11,7 @@
 <div id="container">
 	<div id="catagories">
 		<div id="vendingLogo">
-			<figure class="logo"><a href="HomePage.jsp" style="text-decoration: none"> <img id ="logo" src="logo.png" width="25%" height="25%"></a></figure>
+			<figure class="logo"><a href="HomePage.jsp" style="text-decoration: none"> <img id ="logo" src="logo.png" width="400%" height="200%"></a></figure>
 		</div>
 			
 	</div>
