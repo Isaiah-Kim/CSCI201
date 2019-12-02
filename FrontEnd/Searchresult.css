@@ -117,19 +117,19 @@ height: 35px;
 margin-top: auto;
 }
 .link {
-padding-top:100px;
+padding-top:14px;
 text-align:center;
-font-size: 19px;
+font-size: 17px;
 vertical-align: middle;
 text-decoration: none;
-color:black;
+color: #696969;
 }
 .loginRegister{
-border-radius: 25px;
+border-radius: 50px;
 border: 0px white;
 background-color: #FFFFFF;
 width: 35%;
-height: 35px;
+height: 48px;
 padding-top: 10px;
 
 resize: vertical;
@@ -144,7 +144,7 @@ text-align:center;
 font-size: 19px;
 vertical-align: middle;
 text-decoration: none;
-color: black;
+color: #696969;
 }
 .headerHome{
 display: flex;
