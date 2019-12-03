@@ -1,3 +1,4 @@
+
 <!DOCTYPE html> 
 
 <html> 
@@ -7,33 +8,9 @@
 <link rel="stylesheet" href="Homepage.css">
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-/*
-var arr = window.location.href;
-var autharr = arr.split("auth=");
-var auth = autharr[1];
-  $(document).ready(function() {
-    
-    
-    console.log("Auth is "+ auth);
-    
-    var sect = document.getElementById("authenticated");
-    var prof = document.getElementById("profile");
-    
-    if(auth==null || auth.length!=64)
-    {
-        prof.style="display: none";
-    }else{
-      sect.style="display: none";
-      document.getElementById("hiddenAuth").value=auth;
-    }
-  });
+
+
   
-function toProfile(){
-    
-    location.href='Profile.jsp?auth='+auth;
-  }
-  
-  */
   function getRadioVal(form, name) {
       var val;
       var radios = form.elements[name];
@@ -66,33 +43,15 @@ function toProfile(){
     return true;
   }
   
-  $(document).ready(function(){
-	  var res = <%= session.getAttribute( "resultMachines" ) %>;
-	  console.log(res);
-	  var machines = <%= session.getAttribute("jsonY") %>;
-	  console.log(machines);
-	  if(res == null){
-		  $.getJSON("AllMachinesDatabase", function(result){
-			  console.log(result);
-			result.forEach(function(item){
-				var latlng={
-						lat: item.lat,
-						lng: item.lng
-				}
-				
-				addMarker(latlng, stringifyMachine(item));
-			})
-		  });
-	  } else {  machines.forEach(function (item){
-			var latlng = {
-					lat: item.lat,
-					lng: item.lng
-				}
-				
-				addMarker(latlng, stringifyMachine(item));
-			});}
-	
-  });
+
+  
+
+  function logOut(){
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.open("GET","Logout?",false);
+	  xhttp.send();
+	  window.location.href = "Homepage.jsp";
+  }
 </script>
 
 
@@ -148,7 +107,7 @@ height: 25px;
 <body> 
 <div class="tab">
   <div class = "centerFilter"> <p id= "filter"> Filters </p> </div> <br>
-  <form name="filterform" method = GET action = "Homepage.jsp" class = "FORM" onsubmit = "return search();"> <br>
+  <form name="filterform" class = "FORM"> <br>
 <p id = "item">Items</p> <br>
   <input type="radio" name="item" value="1"> food
   <input type="radio" name="item" value="2"> drink<br> 
@@ -165,7 +124,7 @@ height: 25px;
  <input type="submit" value="Submit">
 </form>
 </div>
-<form name="myformSearchPage" method=GET action="Homepage.jsp" onsubmit = "return search();"
+<form name="myformSearchPage"
       class="containerSearchPage"> 
       
       <input type="text" name="item"
@@ -177,8 +136,21 @@ height: 25px;
 </form>
 <div class="headerHome">
     <div class="loginRegister" id="authenticated">
+    <%
+    if(session.getAttribute("user") == null){
+    %>
+    	
       <a class="link" href="Login.jsp">Login   |   </a>
       <a class="link" href="Register.jsp">Register</a>
+    <%
+    }
+    else{
+    %>
+    	<a class="link" href="History.jsp">History   |   </a>
+        <a class="link" href="Homepage.jsp" onclick="logOut()">Sign Out</a>
+    <%
+    }
+    %>
     </div>
 </div>
 <br>
