@@ -116,4 +116,35 @@
 			item.setMap(null);
 		});
 		markers.length = 0;
+		
+		if(navigator.geolocation){
+			navigator.geolocation.getCurrentPosition(function(position) {
+				pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+				var marker = new google.maps.Marker({
+					position: pos,
+					map: map,
+					icon: 'favicon.ico'
+				});
+				markers.push(marker);
+				
+				//Add InfoWindow
+				//Will need to make some function to template the html
+				
+				var infowindow = new google.maps.InfoWindow({
+					content: 'You are here'
+				});
+				
+				infoWindows.push(infowindow);
+				
+				marker.addListener('click', function() {
+					infoWindows.forEach(function(iw){
+						iw.close();
+					})
+					infowindow.open(map, marker);
+				});
+			});
+		};
 	}
