@@ -18,7 +18,28 @@
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				};
-				addMarker(pos, "Here I am");
+				var marker = new google.maps.Marker({
+					position: pos,
+					map: map,
+					icon: 'favicon.ico'
+				});
+				markers.push(marker);
+				
+				//Add InfoWindow
+				//Will need to make some function to template the html
+				
+				var infowindow = new google.maps.InfoWindow({
+					content: 'You are here'
+				});
+				
+				infoWindows.push(infowindow);
+				
+				marker.addListener('click', function() {
+					infoWindows.forEach(function(iw){
+						iw.close();
+					})
+					infowindow.open(map, marker);
+				});
 			});
 		};
 		
@@ -26,9 +47,9 @@
 		
 		var exampleMachine = {
 				img: "ams39snack.jpg",
-				name: "Jugemu",
-				loc: "CarGar",
-				average: "6.9",
+				name: "Testing Machine",
+				loc: "Cromwell Field",
+				average: "3.4",
 				id:34
 		};
 		
@@ -76,7 +97,7 @@
 	function stringifyMachine(targetMachine){
 		//alert(targetMachine);
 		var stringBuild = "<div class=\"infoWindow\"><img class=\"infoImg\" src=\"";
-		stringBuild += "ams40snack.jpg";
+		stringBuild += "ams39snack.jpg";
 		stringBuild += "\"><div class = \"infoTexts\"><h1><a class=\"infoTitle\" href=\"Details.jsp?id=";
 		stringBuild += targetMachine.id;
 		stringBuild += "\">";
