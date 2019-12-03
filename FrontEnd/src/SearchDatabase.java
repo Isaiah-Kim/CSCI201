@@ -71,13 +71,13 @@ private static final long serialVersionUID = 1L;
 		int rangeValue = Integer.parseInt(request.getParameter("rangeValue"));
 		String product = request.getParameter("product");
 		String endPreparedString = "";
-		List<VendingMachine> vm = new ArrayList<VendingMachine>();
+		
 		if(!itemValue.equals("-1"))
-			endPreparedString = endPreparedString + " AND (itemValue=" + itemValue + " OR paymentValue=0";
+			endPreparedString = endPreparedString + " AND (content=" + itemValue + " OR content=0)";
 		if(!paymentValue.equals("-1"))
-			endPreparedString = endPreparedString + " AND (paymentValue=" + paymentValue + " OR paymentValue=0)";
+			endPreparedString = endPreparedString + " AND (payment=" + paymentValue + " OR payment=0)";
 		if(rangeValue != 0)
-			endPreparedString = endPreparedString + " AND rangeValue=" + rangeValue;
+			endPreparedString = endPreparedString + " AND rating>" + rangeValue;
 		
 		List<VendingMachine> machines = new ArrayList<VendingMachine>();
 		
@@ -115,7 +115,7 @@ private static final long serialVersionUID = 1L;
 				double average = rs.getDouble("rating");
 				int raters = rs.getInt("raters");
 				List<Review> reviews = this.getReviews(conn, id);
-				VendingMachine newMach = new VendingMachine(title,location,myLatLng, itemValue, paymentValue, average, raters, id, reviews);
+				VendingMachine newMach = new VendingMachine(title,location,lat,lon, itemValue, paymentValue, average, raters, id, reviews);
 				machines.add(newMach);
 			}
 		} catch(Exception e) {
