@@ -35,6 +35,15 @@
 		
 		alert(machines);
 		
+		machines.forEach(function (item){
+			var latlng = {
+				lat: item.lat,
+				lng: item.lng
+			}
+			
+			addMarker(latlng, stringifyMachine(item));
+		});
+		
 		//addMarker(loc, stringifyMachine(exampleMachine));
 		//addMarker(loc, "<body><div class=\"infoWindow\"><img class=\"infoImg\" src=\"ams39snack.jpg\"><div class=\"infoTexts\"><h1 class=\"infoTitle\">First</h1><br><h2 class=\"infoRating\">7/10</h2></div></div></body>");
 	}
