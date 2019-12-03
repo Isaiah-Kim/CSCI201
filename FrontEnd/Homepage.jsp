@@ -50,8 +50,6 @@ function toProfile(){
       return val;
   }
   
-
-  
   function search(){
     var itemValue = getRadioVal(document.getElementById('filterform'), 'item');
     var paymentValue = getRadioVal(document.getElementById('filterform'), 'item');
@@ -69,32 +67,30 @@ function toProfile(){
   }
   
   $(document).ready(function(){
-	  var res = <%= session.getAttribute( "resultMachines" ) %>;
-	  
-	  var machines = <%= session.getAttribute("jsonY") %>;
-	  if(res == null){
-		  $.getJSON("AllMachinesDatabase", function(result){
-			result.forEach(function(item){
-				var latlng={
-						lat: item.lat,
-						lng: item.lng
-				}
-				
-				addMarker(latlng, stringifyMachine(item));
-			})
-		  });
-	  } else {  machines.forEach(function (item){
-			var latlng = {
-					lat: item.lat,
-					lng: item.lng
-				}
-				
-				addMarker(latlng, stringifyMachine(item));
-			});}
-	
-  });
-  
-  
+      var res = <%= session.getAttribute( "resultMachines" ) %>;
+      
+      var machines = <%= session.getAttribute("jsonY") %>;
+      if(res == null){
+        $.getJSON("AllMachinesDatabase", function(result){
+        result.forEach(function(item){
+          var latlng={
+              lat: item.lat,
+              lng: item.lng
+          }
+          
+          addMarker(latlng, stringifyMachine(item));
+        })
+        });
+      } else {  machines.forEach(function (item){
+        var latlng = {
+            lat: item.lat,
+            lng: item.lng
+          }
+          
+          addMarker(latlng, stringifyMachine(item));
+        });}
+    
+    });
 </script>
 
 

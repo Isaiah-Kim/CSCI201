@@ -1,7 +1,10 @@
+package Project;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +36,26 @@ public class AllMachinesDatabase extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    public List<Review> getReviews(java.sql.Connection con, int id){
+    	List<Review> results = new ArrayList<Review>();
+    	try {
+    		ps = (PreparedStatement) con.prepareStatement("SELECT * FROM Review WHERE vendingMachineID=?");
+			ps.setInt(1, id);
+			ResultSet rs2 = ps.executeQuery();
+	    	while(rs2.next()) {
+	    		String user = rs2.getString("user");
+	    		String review = rs2.getString("review");
+	    		int revInt = rs2.getInt("reviewInt");
+	    		Review newR = new Review(user, review, revInt);
+	    		results.add(newR);
+	    	}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return results;
+    }
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
@@ -47,8 +70,8 @@ public class AllMachinesDatabase extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(CREDENTIALS_STRING);
 			String command = "SELECT * FROM VendingMachines";
-			ps = conn.prepareStatement(command);
-			ps.setString(1,product);
+			ps = (PreparedStatement) conn.prepareStatement(command);
+			//ps.setString(1,product);
 			rs = ps.executeQuery();
 			while (rs.next()){
 				int id = rs.getInt("vmID");
@@ -59,6 +82,7 @@ public class AllMachinesDatabase extends HttpServlet {
 				String myLatLng = rs.getString("latLng");
 				
 				int itemVal = rs.getInt("content");
+				String itemValue;
 				if(itemVal == 0)
 					itemValue = "Food and Drink";
 				else if(itemVal == 1)
@@ -67,6 +91,7 @@ public class AllMachinesDatabase extends HttpServlet {
 					itemValue = "Drink";
 				
 				int paymentVal = rs.getInt("payment"); //how will payment value be checked if vending machines only have one option probably add another to the radio button
+				String paymentValue;
 				if(paymentVal == 0)
 					paymentValue = "Cash and Card";
 				else if(paymentVal == 1)
@@ -123,14 +148,14 @@ public class AllMachinesDatabase extends HttpServlet {
 			builder += "\", \"location\":\"";
 			builder += vm.location;
 			builder += "\", \"lat\":";
-			builder += vm.lat;
+			builder += vm.latitude;
 			builder += ", \"lng\":";
-			builder += vm.lng;
+			builder += vm.longitude;
 			builder += ", \"average\"";
-			builder += vm.average;
+			builder += vm.rating;
 			builder += ", \"id\"";
 			builder += vm.id;
-			builder += "}"
+			builder += "}";
 		}
 		builder += "]";
 		return builder;
