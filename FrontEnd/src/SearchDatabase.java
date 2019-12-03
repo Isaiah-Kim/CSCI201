@@ -17,11 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import src.Bookcase;
-import src.BufferedReader;
-import src.Gson;
-import src.String;
-
+import java.io.BufferedReader;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class SearchDatabase
