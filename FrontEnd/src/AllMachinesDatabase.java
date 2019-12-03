@@ -120,7 +120,8 @@ public class AllMachinesDatabase extends HttpServlet {
 			}
 		}
 		//session.setAttribute("resultMachines", machines);
-		session.setAttribute("jsonY", doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(machines));
+		response.setContentType("application/json");
+		response.getWriter().write(doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(machines));
 		
 	}
 

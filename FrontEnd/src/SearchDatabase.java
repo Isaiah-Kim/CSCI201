@@ -155,7 +155,7 @@ private static final long serialVersionUID = 1L;
 	
 	private String doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(List<VendingMachine> machines){
 		String builder = "[";
-		for(VendingMachine vm : machines) {
+		for(int i = 0; i < machines.size(); i++) {
 			builder += "{name:\"";
 			builder += vm.name;
 			builder += "\", location:\"";
@@ -170,6 +170,11 @@ private static final long serialVersionUID = 1L;
 			builder += vm.id;
 			builder += "}";
 		}
+		
+		if(i < machines.size()-1) {
+			builder += ",";
+		}
+		
 		builder += "]";
 		return builder;
 		
