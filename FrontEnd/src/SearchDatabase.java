@@ -163,6 +163,8 @@ private static final long serialVersionUID = 1L;
 			builder += vm.lng;
 			builder += ", average=";
 			builder += vm.average;
+			builder += ", id=";
+			builder += vm.id;
 			builder += "}"
 		}
 		builder += "]";

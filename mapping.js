@@ -75,14 +75,16 @@
 	function stringifyMachine(targetMachine){
 		var stringBuild = "<div class=\"infoWindow\"><img class=\"infoImg\" src=\"";
 		stringBuild += "ams39snack.jpg";
-		stringBuild += "\"><div class = \"infoTexts\"><h1 class=\"infoTitle\">";
+		stringBuild += "\"><div class = \"infoTexts\"><a class=\"infoTitle\" href=\"Details.jsp?id=";
+		stringBuild += targetMachine.id;
+		stringBuild += ">";
 		stringBuild += targetMachine.name;
-		stringBuild += "</h1><h2 class=\"infoLoc\">";
+		stringBuild += "</a><h2 class=\"infoLoc\">";
 		stringBuild += targetMachine.loc;
 		stringBuild += "</h2><h2 class=\"infoRating\">";
 		stringBuild += targetMachine.average;
 		stringBuild += "</h2></div></div>"
-		//alert(stringBuild);
+		alert(stringBuild);
 		return stringBuild;
 	}
 	
