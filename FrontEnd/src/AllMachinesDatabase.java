@@ -158,13 +158,10 @@ public class AllMachinesDatabase extends HttpServlet {
 			builder += ", \"id\"";
 			builder += vm.id;
 			builder += "}";
-<<<<<<< HEAD
 			
 			if(i < machines.size()-1) {
 				builder += ",";
 			}
-=======
->>>>>>> branch 'master' of git@github.com:Isaiah-Kim/CSCI201.git
 		}
 		builder += "]";
 		return builder;
