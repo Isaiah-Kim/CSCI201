@@ -89,12 +89,14 @@ private static final long serialVersionUID = 1L;
 			ps.setString(1,product);
 			rs = ps.executeQuery();
 			while (rs.next()){
-				int id = rs.getInt("vendingMachineID");
-				String title = rs.getString("name");
-				String location = rs.getString("location");
+				int id = rs.getInt("vmID");
+				double lat = rs.getFloat("latitude");
+				double lon = rs.getFloat("longitude");
+				String title = "Vending Machine " + id;
+				String location = rs.getString("building");
 				String myLatLng = rs.getString("latLng");
 				
-				int itemVal = rs.getInt("itemValue");
+				int itemVal = rs.getInt("content");
 				if(itemVal == 0)
 					itemValue = "Food and Drink";
 				else if(itemVal == 1)
@@ -102,7 +104,7 @@ private static final long serialVersionUID = 1L;
 				else
 					itemValue = "Drink";
 				
-				int paymentVal = rs.getInt("paymentValue"); //how will payment value be checked if vending machines only have one option probably add another to the radio button
+				int paymentVal = rs.getInt("payment"); //how will payment value be checked if vending machines only have one option probably add another to the radio button
 				if(paymentVal == 0)
 					paymentValue = "Cash and Card";
 				else if(paymentVal == 1)
@@ -110,9 +112,10 @@ private static final long serialVersionUID = 1L;
 				else
 					paymentValue = "Card";
 				
-				double average = rs.getDouble("average");
+				double average = rs.getDouble("rating");
+				int raters = rs.getInt("raters");
 				List<Review> reviews = this.getReviews(conn, id);
-				VendingMachine newMach = new VendingMachine(title,location,myLatLng, itemValue, paymentValue, average, id, reviews);
+				VendingMachine newMach = new VendingMachine(title,location,myLatLng, itemValue, paymentValue, average, raters, id, reviews);
 				machines.add(newMach);
 			}
 		} catch(Exception e) {
