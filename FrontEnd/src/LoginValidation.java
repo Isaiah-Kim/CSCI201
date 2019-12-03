@@ -1,3 +1,5 @@
+package Project;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,20 +46,24 @@ public class LoginValidation extends HttpServlet {
 		ResultSet rs2 = null;
 		
 		try {
-		
+		System.out.println("1");
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://google/hyunjaec_assignment3?cloudSqlInstance=assignment3-257802:us-central1:hyunjaec-assignment3&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=chj0720");
+			conn = DriverManager.getConnection("jdbc:mysql://google/Vending?cloudSqlInstance=l-lab7:us-central1:root&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=root");
+
+			//conn = DriverManager.getConnection("jdbc:mysql://google/Project?cloudSqlInstance=turing-glider-255501:us-central1:sql-db-1&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=admin&password=admin");
+			System.out.println("1");
 			ps = conn.prepareStatement(
 					"SELECT * " + 
-					"    FROM User " + 
+					"    FROM Users " + 
 					"		WHERE username = ?;"
 					);
+			System.out.println("1");
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
 				if(password.equals(rs.getString("password"))) {
-					nextPage = "/HomePage.jsp";
+					nextPage = "/Homepage.jsp";
 					request.getSession().setAttribute("user", username);
 				}
 				else {
