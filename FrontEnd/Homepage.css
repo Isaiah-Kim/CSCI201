@@ -54,14 +54,16 @@ padding: 0.5em;
 -webkit-appearance: none;
 border-radius: 5px;
 }
-input[type=radio]:checked {
-  background-color: #C0C0C0;
-  background-size: 9px 9px;
-}
+
 
 input[type=radio]:focus {
-  outline-color: transparent;
+outline-color: transparent;
 }
+input[type=radio]:checked {
+background-color: #C0C0C0;
+background-size: 9px 9px;
+}
+
 input[type=submit] {
 border:0px white;
 box-shadow: 0px 1px 4px 0.5px #696969;
@@ -79,7 +81,7 @@ background-color: #ffffff;
 .containerSearchPage {
 	margin-left: 5%;
 	padding-top: 1.5%;
-	
+
 }
 .searchInput[type=text], select, textarea {
 	border-radius: 12px;
@@ -94,7 +96,7 @@ background-color: #ffffff;
 	margin-right: 2%;
 	box-shadow: 2px 2px 5px 2px #696969;
 	font-size: 17px;
-	
+
 
 }
 
@@ -141,7 +143,7 @@ background-color: #ffffff;
 	margin-top: 7px;
 	box-shadow: 2px 2px 5px 2px #696969;
 	font-size: 17px;
-	
+
 	text-align:center;
 	font-size: 19px;
 	vertical-align: middle;
@@ -170,30 +172,37 @@ background-color: #ffffff;
 	margin-left: auto;
   margin-right: auto;
 margin-top: 20px;
-  
+
   height: 870px;
   right: -4px;
 left:auto;
-  
+
 }
 
 .infoWindow{
 	width:300px;
 }
-
 .infoImg{
-	width:30%;
-	float:left;
-	margin-top:0px;
-	margin-right:0px;
-	display:inline;
-}
+	width: 30%;
+float: left;
+margin-top: 0px;
 
+}
+.infoImg {
+
+margin-right: 0px;
+display: inline;
+}
 .infoTexts{
 	float:left;
 	width:69%;
-	display:inline;
 	height:100%;
+}
+
+.infoTexts {
+	
+	display:inline;
+	
 }
 
 .infoRating{
@@ -208,11 +217,10 @@ left:auto;
 
 a{
 	color:#9d2235;
-	text-decoration:none;!important
+	text-decoration:none;
 }
 
 .infoLoc{
 	margin:5px;
 	float:top;
 }
-

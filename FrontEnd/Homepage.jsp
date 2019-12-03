@@ -10,7 +10,6 @@
 var arr = window.location.href;
 var autharr = arr.split("auth=");
 var auth = autharr[1];
-
   $(document).ready(function() {
     
     
@@ -34,40 +33,47 @@ function toProfile(){
   }
   
   */
+  function getRadioVal(form, name) {
+      var val;
+      var radios = form.elements[name];
+      
+      for (var i=0, len=radios.length; i<len; i++) {
+          if ( radios[i].checked ) {
+            val = radios[i].value;
+              break;
+          }
+          if( i == len-1){
+            val = "-1";
+          }
+      }
+      return val;
+  }
   
-		function getRadioVal(form, name) {
-		    var val;
-		    var radios = form.elements[name];
-		    
-		    for (var i=0, len=radios.length; i<len; i++) {
-		        if ( radios[i].checked ) {
-		        	val = radios[i].value;
-		            break;
-		        }
-		        if( i == len-1){
-		        	val = "-1";
-		        }
-		    }
-		    return val;
-		}
-		
-		function search(){
-			var itemValue = getRadioVal(document.getElementById('filterform'), 'item');
-			var paymentValue = getRadioVal(document.getElementById('filterform'), 'item');
-			var rangeValue = document.getElementById("sliderRange");
-			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "SearchDatabase?product=" + document.myformSearchPage.item.value +"&itemValue=" + itemValue + "&paymentValue=" + paymentValue + "&rangeValue=" + rangeValue, false);
-			xhttp.send();
-			return true;
-		}
-		function history(){
-			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "HistoryDatabase?", false);
-			xhttp.send();
-			return true;
-		}
-	</script>
-	
+  function search(){
+    var itemValue = getRadioVal(document.getElementById('filterform'), 'item');
+    var paymentValue = getRadioVal(document.getElementById('filterform'), 'item');
+    var rangeValue = document.getElementById("sliderRange");
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "SearchDatabase?product=" + document.myformSearchPage.item.value +"&itemValue=" + itemValue + "&paymentValue=" + paymentValue + "&rangeValue=" + rangeValue, false);
+    xhttp.send();
+    return true;
+  }
+  function history(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "HistoryDatabase?", false);
+    xhttp.send();
+    return true;
+  }
+  
+  
+</script>
+
+
+
+ <script async defer 
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0hzC85PcofCh0luuo5By7JgublOMvWds&callback=initMap">
+    </script>
+    <script type="text/javascript" src="mapping.js"></script>
     
 </head>
 <style> 
@@ -76,9 +82,9 @@ function toProfile(){
     width: 50%; 
     font-family:roboto;
    font-size:25px;
-	color: #696969;
-	margin-left: 20px;
-	margin-top: 25px;
+color: #696969;
+margin-left: 20px;
+margin-top: 25px;
 } 
   
 .myslider { 
@@ -126,7 +132,7 @@ height: 25px;
   
 <div class="rangeslider"> 
   <p>Rating: <span id="demo"></span></p> 
-  <input type="range" min="0" max="5" value="0" step="1" class="myslider" id="sliderRange"> 
+  <input type="range" min="0" max="5" value="1" step="1" class="myslider" id="sliderRange"> 
   
 </div> 
  <input type="submit" value="Submit">
