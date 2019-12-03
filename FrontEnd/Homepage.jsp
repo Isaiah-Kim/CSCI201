@@ -35,7 +35,6 @@ function toProfile(){
   
   */
   
-<script>
 		function getRadioVal(form, name) {
 		    var val;
 		    var radios = form.elements[name];
