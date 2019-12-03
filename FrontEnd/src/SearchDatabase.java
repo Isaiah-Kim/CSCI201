@@ -1,4 +1,4 @@
-
+package Project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -161,14 +161,14 @@ private static final long serialVersionUID = 1L;
 			builder += "\", location:\"";
 			builder += vm.location;
 			builder += "\", lat=";
-			builder += vm.lat;
+			builder += vm.latitude;
 			builder += ", lng=";
-			builder += vm.lng;
+			builder += vm.longitude;
 			builder += ", average=";
-			builder += vm.average;
+			builder += vm.rating;
 			builder += ", id=";
 			builder += vm.id;
-			builder += "}"
+			builder += "}";
 		}
 		builder += "]";
 		return builder;

@@ -1,5 +1,4 @@
-
-
+package Project;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -56,10 +55,12 @@ public class SingupValidation extends HttpServlet {
 			try {
 				
 				Class.forName("com.mysql.jdbc.Driver");
-				conn = DriverManager.getConnection("jdbc:mysql://google/hyunjaec_assignment3?cloudSqlInstance=assignment3-257802:us-central1:hyunjaec-assignment3&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=chj0720");
+				conn = DriverManager.getConnection("jdbc:mysql://google/Vending?cloudSqlInstance=l-lab7:us-central1:root&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=root");
+
+				//conn = DriverManager.getConnection("jdbc:mysql://google/hyunjaec_assignment3?cloudSqlInstance=assignment3-257802:us-central1:hyunjaec-assignment3&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=chj0720");
 				ps = conn.prepareStatement(
 						"SELECT * " + 
-						"    FROM User " + 
+						"    FROM Users " + 
 						"		WHERE username = ?;"
 						);
 				ps.setString(1, username);
@@ -74,7 +75,7 @@ public class SingupValidation extends HttpServlet {
 				}
 				
 				ps2 = conn.prepareStatement(
-						"INSERT INTO User (username, password) " + 
+						"INSERT INTO Users (username, password) " + 
 						"    VALUES (?, ?); "
 						);
 				ps2.setString(1, username);
@@ -82,7 +83,7 @@ public class SingupValidation extends HttpServlet {
 				ps2.executeUpdate();
 				
 				request.getSession().setAttribute("user", username);
-				nextPage = "/HomePage.jsp";
+				nextPage = "/Homepage.jsp";
 				RequestDispatcher dispatch = getServletContext().getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 			}catch(SQLException sqle) {

@@ -1,8 +1,9 @@
-package Project;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,16 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mysql.jdbc.PreparedStatement;
-
 /**
- * Servlet implementation class AllMachinesDatabase
+ * Servlet implementation class HistoryDatabase
  */
-@WebServlet("/AllMachinesDatabase")
-public class AllMachinesDatabase extends HttpServlet {
+@WebServlet("/HistoryDatabase")
+public class HistoryDatabase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static final String CREDENTIALS_STRING = ""; //TODO - PUT IN CREDENTIALS STRING
+	public static final String CREDENTIALS_STRING = "jdbc:mysql://google/Project?cloudSqlInstance=turing-glider-255501:us-central1:sql-db-1&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=admin&password=admin"; //TODO - PUT IN CREDENTIALS STRING
     static java.sql.Connection conn = null;
     PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -32,7 +31,7 @@ public class AllMachinesDatabase extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllMachinesDatabase() {
+    public HistoryDatabase() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,7 +39,7 @@ public class AllMachinesDatabase extends HttpServlet {
     public List<Review> getReviews(java.sql.Connection con, int id){
     	List<Review> results = new ArrayList<Review>();
     	try {
-    		ps = (PreparedStatement) con.prepareStatement("SELECT * FROM Review WHERE vendingMachineID=?");
+    		ps = con.prepareStatement("SELECT * FROM Reviews WHERE vmID=?");
 			ps.setInt(1, id);
 			ResultSet rs2 = ps.executeQuery();
 	    	while(rs2.next()) {
@@ -64,14 +63,15 @@ public class AllMachinesDatabase extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
+		String username = (String)session.getAttribute("user");
 		List<VendingMachine> machines = new ArrayList<VendingMachine>();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(CREDENTIALS_STRING);
-			String command = "SELECT * FROM VendingMachines";
-			ps = (PreparedStatement) conn.prepareStatement(command);
-			//ps.setString(1,product);
+			String command = "SELECT * FROM VendingMachines WHERE vmID IN (SELECT vmID FROM History WHERE username=?);";
+			ps = conn.prepareStatement(command);
+			ps.setString(1,username);
 			rs = ps.executeQuery();
 			while (rs.next()){
 				int id = rs.getInt("vmID");
@@ -101,8 +101,9 @@ public class AllMachinesDatabase extends HttpServlet {
 				
 				double average = rs.getDouble("rating");
 				int raters = rs.getInt("raters");
+				
 				List<Review> reviews = this.getReviews(conn, id);
-				VendingMachine newMach = new VendingMachine(title,location,lat,lon, itemValue, paymentValue, average, raters, id, reviews);
+				VendingMachine newMach = new VendingMachine(title,location,lat,lon, itemValue, paymentValue, average,raters, id, reviews);
 				machines.add(newMach);
 			}
 		} catch(Exception e) {
@@ -119,9 +120,7 @@ public class AllMachinesDatabase extends HttpServlet {
 				System.out.println(sqle.getMessage());
 			}
 		}
-		//session.setAttribute("resultMachines", machines);
-		session.setAttribute("jsonY", doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(machines));
-		
+		session.setAttribute("historyMachines", machines);
 	}
 
 	/**
@@ -138,37 +137,6 @@ public class AllMachinesDatabase extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-	
-	private String doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(List<VendingMachine> machines){
-		String builder = "[";
-		
-		for(int i = 0; i < machines.size(); i++) {
-			VendingMachine vm = machines.get(i);
-			builder += "{\"name\":\"";
-			builder += vm.name;
-			builder += "\", \"location\":\"";
-			builder += vm.location;
-			builder += "\", \"lat\":";
-			builder += vm.latitude;
-			builder += ", \"lng\":";
-			builder += vm.longitude;
-			builder += ", \"average\"";
-			builder += vm.rating;
-			builder += ", \"id\"";
-			builder += vm.id;
-			builder += "}";
-<<<<<<< HEAD
-			
-			if(i < machines.size()-1) {
-				builder += ",";
-			}
-=======
->>>>>>> branch 'master' of git@github.com:Isaiah-Kim/CSCI201.git
-		}
-		builder += "]";
-		return builder;
-		
 	}
 
 }

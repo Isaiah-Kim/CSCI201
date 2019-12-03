@@ -1,3 +1,4 @@
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 	<div id="container">
 		<div id="catagories">
 			<div id="vendingLogo">
-				<figure class="logo"><a href="HomePage.jsp" style="text-decoration: none"> <img id ="logo" src="logo.png" width="400%" height="200%"></a></figure>
+				<figure class="logo"><a href="Homepage.jsp" style="text-decoration: none"> <img id ="logo" src="logo.png" width="400%" height="200%"></a></figure>
 			</div>		
 		</div>
 		<div id="searchbox">
@@ -40,12 +41,10 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script>
-
 <%
 /* What the username was */
 String olduser = request.getParameter("username");
 %>
-
 //Updates the form fields to keep the values used previously
 function updatefields() {	
 	if ("<%= olduser %>" != "null"){
