@@ -1,171 +1,259 @@
-
-<!DOCTYPE html> 
-
-<html> 
-<head>
-<meta charset="UTF-8">
-<title>Homepage</title>
-<link rel="stylesheet" href="Homepage.css">
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-
-
+/**
+ * 
+ */
+/*
+console.log("here");
+var map;
+  var pos;
   
-  function getRadioVal(form, name) {
-      var val;
-      var radios = form.elements[name];
-      
-      for (var i=0, len=radios.length; i<len; i++) {
-          if ( radios[i].checked ) {
-            val = radios[i].value;
-              break;
-          }
-          if( i == len-1){
-            val = "-1";
-          }
+  var markers = [];
+  var infoWindows = [];
+  function initMap(){
+    map = new google.maps.Map(document.getElementById('map'), { //Map accepts an object, pass it target.
+      //Initialization values
+      center: {lat: 34.02181, lng: -118.28585},
+      zoom: 17
+    });
+    
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position) {
+        pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        addMarker(pos, "Here I am");
+      });
+    };
+    
+    var loc = {lat: 34.02181, lng: -118.28585};
+    addMarker(loc, "<div class=\"infoWindow\"><h1 class=\"infoTitle\">First</h1><br><img class=\"infoImg\" ><h2 class=\"infoRating\">7/10</h2></div>");
+  }
+  
+  function addMarker(myLatLng, contentString){ //Pass just the html
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map
+    });
+    markers.push(marker);
+    
+    //Add InfoWindow
+    //Will need to make some function to template the html
+    
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    
+    infoWindows.push(infowindow);
+    
+    marker.addListener('click', function() {
+      infoWindows.forEach(function(iw){
+        iw.close();
+      })
+      infowindow.open(map, marker);
+    });
+  }
+  
+  function clearMap(){
+    markers.forEach(function(item){
+      item.setMap(null);
+    });
+    markers.length = 0;
+    
+  }
+*/
+
+  var map;
+  var pos;
+
+  var markers = [];
+  var infoWindows = [];
+
+
+  function initMap(){
+    map = new google.maps.Map(document.getElementById('map'), { //Map accepts an object, pass it target.
+      //Initialization values
+      center: {lat: 34.02181, lng: -118.28585},
+      zoom: 17
+    });
+
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position) {
+        pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        addMarker(pos, "Here I am");
+      });
+    };
+
+    var loc = {lat: 34.018852, lng: -118.28740};
+    var loc2 = {lat: 34.018867, lng: -118.287441};
+    var loc3 = {lat: 34.018774, lng: -118.287539};
+    
+    var loc4 = {lat: 34.022613, lng: -118.290796};
+    var loc5 = {lat: 34.021465, lng: -118.283847};
+    var loc6 = {lat: 34.021785, lng: -118.28454};
+    var loc7 = {lat: 34.021816, lng: -118.284652};
+    
+    var loc8 = {lat: 34.021165, lng: -118.284216};
+    var loc9 = {lat: 34.021039, lng: -118.28400};
+    var loc10 = {lat: 34.021319, lng: -118.283994};
+    
+
+    var exampleMachine = {
+        img: "ams39snack.jpg",
+        name: "VM 1",
+        loc: "HAR",
+        average: "4.5",
+        id:10
+    };
+    addMarker(loc, stringifyMachine(exampleMachine));
+    
+    var exampleMachine2 = {
+        img: "ams39snack.jpg",
+        name: "VM 2",
+        loc: "HAR",
+        average: "4.5",
+        id:1
+    };
+    addMarker(loc2, stringifyMachine(exampleMachine2));
+
+    var exampleMachine3 = {
+        img: "ams39snack.jpg",
+        name: "VM 3",
+        loc: "KAP",
+        average: "4.5",
+        id:2
+    };
+    addMarker(loc3, stringifyMachine(exampleMachine3));
+  
+    var exampleMachine4 = {
+        img: "ams39snack.jpg",
+        name: "VM 4",
+        loc: "KAP",
+        average: "4.5",
+        id:3
+    };
+    addMarker(loc4, stringifyMachine(exampleMachine4));
+
+    var exampleMachine5 = {
+        img: "ams39snack.jpg",
+        name: "VM 5",
+        loc: "SOS",
+        average: "4.5",
+        id:4
+    };
+    addMarker(loc5, stringifyMachine(exampleMachine5));
+
+
+    var exampleMachine6 = {
+        img: "ams39snack.jpg",
+        name: "VM 6",
+        loc: "THH",
+        average: "4.5",
+        id:5
+    };
+    addMarker(loc6, stringifyMachine(exampleMachine6));
+    
+    var exampleMachine7 = {
+        img: "ams39snack.jpg",
+        name: "VM 7",
+        loc: "THH",
+        average: "4.5",
+        id:6
+    };
+    addMarker(loc7, stringifyMachine(exampleMachine7));
+
+    var exampleMachine8 = {
+        img: "ams39snack.jpg",
+        name: "VM 8",
+        loc: "VKC",
+        average: "4.5",
+        id:7
+    };
+    addMarker(loc8, stringifyMachine(exampleMachine8));
+
+
+    var exampleMachine9 = {
+        img: "ams39snack.jpg",
+        name: "VM 9",
+        loc: "VKC",
+        average: "4.5",
+        id:8
+    };
+    addMarker(loc9, stringifyMachine(exampleMachine9));
+    
+    var exampleMachine10 = {
+        img: "ams39snack.jpg",
+        name: "VM 9",
+        loc: "VKC",
+        average: "4.5",
+        id:9
+    };
+    addMarker(loc10, stringifyMachine(exampleMachine10));
+    
+
+    //var machines = <%=session.getAttribute("jsonY")%>;
+
+    /*alert(machines);
+
+    machines.forEach(function (item){
+      var latlng = {
+        lat: item.lat,
+        lng: item.lng
       }
-      return val;
-  }
-  
-  function search(){
-    var itemValue = getRadioVal(document.getElementById('filterform'), 'item');
-    var paymentValue = getRadioVal(document.getElementById('filterform'), 'item');
-    var rangeValue = document.getElementById("sliderRange");
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "SearchDatabase?product=" + document.myformSearchPage.item.value +"&itemValue=" + itemValue + "&paymentValue=" + paymentValue + "&rangeValue=" + rangeValue, false);
-    xhttp.send();
-    return true;
-  }
-  function history(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "HistoryDatabase?", false);
-    xhttp.send();
-    return true;
-  }
-  
 
-  
-
-  function logOut(){
-	  var xhttp = new XMLHttpRequest();
-	  xhttp.open("GET","Logout?",false);
-	  xhttp.send();
-	  window.location.href = "Homepage.jsp";
-  }
-</script>
-
-
-
- <script async defer 
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0hzC85PcofCh0luuo5By7JgublOMvWds&callback=initMap">
-    </script>
-    <script type="text/javascript" src="mapping.js"></script>
+      addMarker(latlng, stringifyMachine(item));
+    });
+    */
     
-</head>
-<style> 
-  
-.rangeslider{ 
-    width: 50%; 
-    font-family:roboto;
-   font-size:25px;
-color: #696969;
-margin-left: 20px;
-margin-top: 25px;
-} 
-  
-.myslider { 
-    -webkit-appearance: none; 
-    background: white; 
-    width: 50%; 
-    height: 20px; 
-    opacity: 2; 
-    border-radius: 25px;
-    border:0px white;
-box-shadow: 0px 1px 4px 0.5px #696969;
-width: 260px;
-height: 25px;
-   } 
-  
-  
-.myslider::-webkit-slider-thumb { 
-    -webkit-appearance: none; 
-    cursor: pointer; 
-    border-radius:25px;
-    background: white; 
-    box-shadow: 0px 1px 4px 0.5px #696969;
-    border: 0px;
-    width: 23px; 
-    height: 23px; 
-} 
-  
-  
-.myslider:hover { 
-    opacity: 1; 
-}
-  
-</style> 
-<body> 
-<div class="tab">
-  <div class = "centerFilter"> <p id= "filter"> Filters </p> </div> <br>
-  <form name="filterform" class = "FORM"> <br>
-<p id = "item">Items</p> <br>
-  <input type="radio" name="item" value="1"> food
-  <input type="radio" name="item" value="2"> drink<br> 
-<p id = "payment">Payment</p>
-  <input type="radio" name="payment" value="1"> Cash
-  <input type="radio" name="payment" value="2"> Card<br>  
-  
-  
-<div class="rangeslider"> 
-  <p>Rating: <span id="demo"></span></p> 
-  <input type="range" min="0" max="5" value="1" step="1" class="myslider" id="sliderRange"> 
-  
-</div> 
- <input type="submit" value="Submit">
-</form>
-</div>
-<form name="myformSearchPage"
-      class="containerSearchPage"> 
-      
-      <input type="text" name="item"
-        placeholder="What would you like to find?" class = "searchInput"> 
-      
-      <button class = "inputSearch"    type="submit">
-        <img class="inputImage" src="magGlass.png"/>
-       </button>
-</form>
-<div class="headerHome">
-    <div class="loginRegister" id="authenticated">
-    <%
-    if(session.getAttribute("user") == null){
-    %>
-    	
-      <a class="link" href="Login.jsp">Login   |   </a>
-      <a class="link" href="Register.jsp">Register</a>
-    <%
-    }
-    else{
-    %>
-    	<a class="link" href="History.jsp">History   |   </a>
-        <a class="link" href="Homepage.jsp" onclick="logOut()">Sign Out</a>
-    <%
-    }
-    %>
-    </div>
-</div>
-<br>
-<div id = "map" class = "mapp"></div>
-    
-  
-<script> 
-var rangeslider = document.getElementById("sliderRange"); 
-var output = document.getElementById("demo"); 
-output.innerHTML = rangeslider.value; 
-  
-rangeslider.oninput = function() { 
-  output.innerHTML = this.value; 
-} 
-</script> 
-  
-</body> 
-</html>
+    //addMarker(loc, "<body><div class=\"infoWindow\"><img class=\"infoImg\" src=\"ams39snack.jpg\"><div class=\"infoTexts\"><h1 class=\"infoTitle\">First</h1><br><h2 class=\"infoRating\">7/10</h2></div></div></body>");
+  }
+
+  function addMarker(myLatLng, contentString){ //Pass just the html
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map
+    });
+    markers.push(marker);
+
+    //Add InfoWindow
+    //Will need to make some function to template the html
+
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    infoWindows.push(infowindow);
+
+    marker.addListener('click', function() {
+      infoWindows.forEach(function(iw){
+        iw.close();
+      })
+      infowindow.open(map, marker);
+    });
+  }
+
+  function stringifyMachine(targetMachine){
+    //alert(targetMachine);
+    var stringBuild = "<div class=\"infoWindow\"><img class=\"infoImg\" src=\"";
+    stringBuild += "ams39snack.jpg";
+    stringBuild += "\"><div class = \"infoTexts\"><h1><a class=\"infoTitle\" href=\"Details.jsp?id=";
+    stringBuild += targetMachine.id;
+    stringBuild += "\">";
+    stringBuild += targetMachine.name;
+    stringBuild += "</a></h1><h2 class=\"infoLoc\">";
+    stringBuild += targetMachine.loc;
+    stringBuild += "</h2><h2 class=\"infoRating\">";
+    stringBuild += targetMachine.average;
+    stringBuild += "</h2></div></div>"
+    //alert(stringBuild);
+    return stringBuild;
+  }
+
+  function clearMap(){
+    markers.forEach(function(item){
+      item.setMap(null);
+    });
+    markers.length = 0;
+  }
