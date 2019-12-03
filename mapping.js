@@ -1,8 +1,10 @@
-var map;
+	var map;
 	var pos;
 	
 	var markers = [];
 	var infoWindows = [];
+	
+	
 	function initMap(){
 		map = new google.maps.Map(document.getElementById('map'), { //Map accepts an object, pass it target.
 			//Initialization values
@@ -28,7 +30,12 @@ var map;
 				loc: "CarGar",
 				average: "6.9"
 		};
-		addMarker(loc, stringifyMachine(exampleMachine));
+		
+		var machines = <%=session.getAttribute("jsonY")%>;
+		
+		alert(machines);
+		
+		//addMarker(loc, stringifyMachine(exampleMachine));
 		//addMarker(loc, "<body><div class=\"infoWindow\"><img class=\"infoImg\" src=\"ams39snack.jpg\"><div class=\"infoTexts\"><h1 class=\"infoTitle\">First</h1><br><h2 class=\"infoRating\">7/10</h2></div></div></body>");
 	}
 	
