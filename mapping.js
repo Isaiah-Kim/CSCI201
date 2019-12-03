@@ -76,7 +76,7 @@
 	function stringifyMachine(targetMachine){
 		//alert(targetMachine);
 		var stringBuild = "<div class=\"infoWindow\"><img class=\"infoImg\" src=\"";
-		stringBuild += "ams39snack.jpg";
+		stringBuild += "ams40snack.jpg";
 		stringBuild += "\"><div class = \"infoTexts\"><h1><a class=\"infoTitle\" href=\"Details.jsp?id=";
 		stringBuild += targetMachine.id;
 		stringBuild += "\">";
