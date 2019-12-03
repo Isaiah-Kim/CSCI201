@@ -94,7 +94,7 @@ public class AllMachinesDatabase extends HttpServlet {
 				System.out.println(sqle.getMessage());
 			}
 		}
-		session.setAttribute("resultMachines", machines);
+		//session.setAttribute("resultMachines", machines);
 		session.setAttribute("jsonY", doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(machines));
 		
 	}
@@ -113,6 +113,28 @@ public class AllMachinesDatabase extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private String doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(List<VendingMachine> machines){
+		String builder = "[";
+		for(VendingMachine vm : machines) {
+			builder += "{\"name\":\"";
+			builder += vm.name;
+			builder += "\", \"location\":\"";
+			builder += vm.location;
+			builder += "\", \"lat\":";
+			builder += vm.lat;
+			builder += ", \"lng\":";
+			builder += vm.lng;
+			builder += ", \"average\"";
+			builder += vm.average;
+			builder += ", \"id\"";
+			builder += vm.id;
+			builder += "}"
+		}
+		builder += "]";
+		return builder;
+		
 	}
 
 }
