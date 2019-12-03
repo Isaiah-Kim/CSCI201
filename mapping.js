@@ -28,12 +28,13 @@
 				img: "ams39snack.jpg",
 				name: "Jugemu",
 				loc: "CarGar",
-				average: "6.9"
+				average: "6.9",
+				id:34
 		};
 		
-		var machines = <%=session.getAttribute("jsonY")%>;
+		//var machines = <%=session.getAttribute("jsonY")%>;
 		
-		alert(machines);
+		/*alert(machines);
 		
 		machines.forEach(function (item){
 			var latlng = {
@@ -43,8 +44,8 @@
 			
 			addMarker(latlng, stringifyMachine(item));
 		});
-		
-		//addMarker(loc, stringifyMachine(exampleMachine));
+		*/
+		addMarker(loc, stringifyMachine(exampleMachine));
 		//addMarker(loc, "<body><div class=\"infoWindow\"><img class=\"infoImg\" src=\"ams39snack.jpg\"><div class=\"infoTexts\"><h1 class=\"infoTitle\">First</h1><br><h2 class=\"infoRating\">7/10</h2></div></div></body>");
 	}
 	
@@ -73,18 +74,19 @@
 	}
 	
 	function stringifyMachine(targetMachine){
+		//alert(targetMachine);
 		var stringBuild = "<div class=\"infoWindow\"><img class=\"infoImg\" src=\"";
 		stringBuild += "ams39snack.jpg";
-		stringBuild += "\"><div class = \"infoTexts\"><a class=\"infoTitle\" href=\"Details.jsp?id=";
+		stringBuild += "\"><div class = \"infoTexts\"><h1><a class=\"infoTitle\" href=\"Details.jsp?id=";
 		stringBuild += targetMachine.id;
-		stringBuild += ">";
+		stringBuild += "\">";
 		stringBuild += targetMachine.name;
-		stringBuild += "</a><h2 class=\"infoLoc\">";
+		stringBuild += "</a></h1><h2 class=\"infoLoc\">";
 		stringBuild += targetMachine.loc;
 		stringBuild += "</h2><h2 class=\"infoRating\">";
 		stringBuild += targetMachine.average;
 		stringBuild += "</h2></div></div>"
-		alert(stringBuild);
+		//alert(stringBuild);
 		return stringBuild;
 	}
 	

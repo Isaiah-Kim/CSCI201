@@ -177,5 +177,42 @@ left:auto;
   
 }
 
+.infoWindow{
+	width:300px;
+}
 
+.infoImg{
+	width:30%;
+	float:left;
+	margin-top:0px;
+	margin-right:0px;
+	display:inline;
+}
+
+.infoTexts{
+	float:left;
+	width:69%;
+	display:inline;
+	height:100%;
+}
+
+.infoRating{
+	margin:10px;
+	float:top;
+}
+
+.infoTitle{
+	margin:5px;
+	float:top;
+}
+
+a{
+	color:#9d2235;
+	text-decoration:none;!important
+}
+
+.infoLoc{
+	margin:5px;
+	float:top;
+}
 
