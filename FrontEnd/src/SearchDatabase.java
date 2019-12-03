@@ -130,6 +130,7 @@ private static final long serialVersionUID = 1L;
 			}
 		}
 		session.setAttribute("resultMachines", machines);
+		session.setAttribute("jsonY", doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(machines));
 	}
 	
 
@@ -148,5 +149,24 @@ private static final long serialVersionUID = 1L;
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
+	
+	private String doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(List<VendingMachine> machines){
+		String builder = "[";
+		for(VendingMachine vm : machines) {
+			builder += "{name:\"";
+			builder += vm.name;
+			builder += "\", location:\"";
+			builder += vm.location;
+			builder += "\", lat=";
+			builder += vm.lat;
+			builder += ", lng=";
+			builder += vm.lng;
+			builder += ", average=";
+			builder += vm.average;
+			builder += "}"
+		}
+		builder += "]";
+		return builder;
+		
+	}
 }

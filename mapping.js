@@ -21,7 +21,15 @@ var map;
 		};
 		
 		var loc = {lat: 34.02181, lng: -118.28585};
-		addMarker(loc, "<div class=\"infoWindow\"><h1 class=\"infoTitle\">First</h1><br><img class=\"infoImg\" src=\"ams39snack.jpg\"><h2 class=\"infoRating\">7/10</h2></div>");
+		
+		var exampleMachine = {
+				img: "ams39snack.jpg",
+				name: "Jugemu",
+				loc: "CarGar",
+				average: "6.9"
+		};
+		addMarker(loc, stringifyMachine(exampleMachine));
+		//addMarker(loc, "<body><div class=\"infoWindow\"><img class=\"infoImg\" src=\"ams39snack.jpg\"><div class=\"infoTexts\"><h1 class=\"infoTitle\">First</h1><br><h2 class=\"infoRating\">7/10</h2></div></div></body>");
 	}
 	
 	function addMarker(myLatLng, contentString){ //Pass just the html
@@ -46,6 +54,20 @@ var map;
 			})
 			infowindow.open(map, marker);
 		});
+	}
+	
+	function stringifyMachine(targetMachine){
+		var stringBuild = "<div class=\"infoWindow\"><img class=\"infoImg\" src=\"";
+		stringBuild += "ams39snack.jpg";
+		stringBuild += "\"><div class = \"infoTexts\"><h1 class=\"infoTitle\">";
+		stringBuild += targetMachine.name;
+		stringBuild += "</h1><h2 class=\"infoLoc\">";
+		stringBuild += targetMachine.loc;
+		stringBuild += "</h2><h2 class=\"infoRating\">";
+		stringBuild += targetMachine.average;
+		stringBuild += "</h2></div></div>"
+		//alert(stringBuild);
+		return stringBuild;
 	}
 	
 	function clearMap(){
