@@ -70,10 +70,12 @@ function toProfile(){
   
   $(document).ready(function(){
 	  var res = <%= session.getAttribute( "resultMachines" ) %>;
-	  
+	  console.log(res);
 	  var machines = <%= session.getAttribute("jsonY") %>;
+	  console.log(machines);
 	  if(res == null){
 		  $.getJSON("AllMachinesDatabase", function(result){
+			  console.log(result);
 			result.forEach(function(item){
 				var latlng={
 						lat: item.lat,

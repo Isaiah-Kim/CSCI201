@@ -117,7 +117,9 @@ public class AllMachinesDatabase extends HttpServlet {
 	
 	private String doGSONsWorkForItBecauseItOutputsWrongForMyPurposes(List<VendingMachine> machines){
 		String builder = "[";
-		for(VendingMachine vm : machines) {
+		
+		for(int i = 0; i < machines.size(); i++) {
+			VendingMachine vm = machines.get(i);
 			builder += "{\"name\":\"";
 			builder += vm.name;
 			builder += "\", \"location\":\"";
@@ -130,7 +132,11 @@ public class AllMachinesDatabase extends HttpServlet {
 			builder += vm.average;
 			builder += ", \"id\"";
 			builder += vm.id;
-			builder += "}"
+			builder += "}";
+			
+			if(i < machines.size()-1) {
+				builder += ",";
+			}
 		}
 		builder += "]";
 		return builder;
