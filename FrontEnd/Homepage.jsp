@@ -93,6 +93,32 @@ function toProfile(){
 			});}
 	
   });
+  
+  $('myformSearchPage').submit(function(e){
+	  e.preventDefault();
+	  var mfsp = $('myformSearchPage').serializeArray();
+	  var itemValue = getRadioVal(document.getElementById('filterform'), 'item');
+	  var paymentValue = getRadioVal(document.getElementById('filterform'), 'item');
+	  var rangeValue = document.getElementById("sliderRange");
+	  var mfspObj = {payment = paymentValue,
+		item = itemValue,
+		range = rangeValue,
+		product = mfsp[0].item
+	  }
+	  
+	  var jsonString = JSON.stringify(mfspObj);
+	  
+	  $.post("SearchDatabase", jsonString, function(onReturn){
+		 onReturn.forEach(function(item){
+			 var latlng = {
+						lat: item.lat,
+						lng: item.lng
+					}
+					
+			addMarker(latlng, stringifyMachine(item));
+		 }) ;
+	  });
+  });
 </script>
 
 
@@ -148,7 +174,7 @@ height: 25px;
 <body> 
 <div class="tab">
   <div class = "centerFilter"> <p id= "filter"> Filters </p> </div> <br>
-  <form name="filterform" method = GET action = "Homepage.jsp" class = "FORM" onsubmit = "return search();"> <br>
+  <form name="filterform" class = "FORM"> <br>
 <p id = "item">Items</p> <br>
   <input type="radio" name="item" value="1"> food
   <input type="radio" name="item" value="2"> drink<br> 
@@ -165,7 +191,7 @@ height: 25px;
  <input type="submit" value="Submit">
 </form>
 </div>
-<form name="myformSearchPage" method=GET action="Homepage.jsp" onsubmit = "return search();"
+<form name="myformSearchPage"
       class="containerSearchPage"> 
       
       <input type="text" name="item"
