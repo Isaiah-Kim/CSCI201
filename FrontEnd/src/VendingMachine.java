@@ -4,16 +4,17 @@ import java.util.List;
 public class VendingMachine {
 	List<Review> reviews = new ArrayList<Review>();
 	String location, latlng, itemValue, paymentValue, name, style;
-	double average;
-	int id;
+	double rating;
+	int id, raters;
 	
-	public VendingMachine(String n, String loc, String coord, String item, String payment,double aver, int machineId, List<Review> rev) {
+	public VendingMachine(String n, String loc, String coord, String item, String payment,double aver, int rt, int machineId, List<Review> rev) {
 		name = n;
 		location = loc; 
 		latlng = coord;
 		itemValue = item;
 		paymentValue = payment;
-		average = aver;
+		rating = aver;
+		raters = rt;
 		id = machineId;
 		reviews = rev;
 	}
@@ -66,12 +67,12 @@ public class VendingMachine {
 		this.name = name;
 	}
 
-	public double getAverage() {
-		return average;
+	public double getRating() {
+		return rating;
 	}
 
 	public void setAverage(double average) {
-		this.average = average;
+		this.rating = average;
 	}
 
 	public int getId() {
@@ -83,3 +84,4 @@ public class VendingMachine {
 	}
 	
 }
+
